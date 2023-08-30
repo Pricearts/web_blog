@@ -42,5 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_editor' => 'bool'
     ];
+
+    public function isAdmin() {
+        return $this->is_editor && session()->has('admin');
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,11 @@ Route::get('/article/{slug}', function () {
     return view('article');
 })->name('article');
 
+Route::group(['prefix' => 'dash'], function () {
+    Route::get('/auth', [AdminAuthController::class, 'index'])->name('dash.auth.index')->middleware('not_admin');
+    Route::post('/auth', [AdminAuthController::class, 'store'])->name('dash.auth.process')->middleware('not_admin');
+
+    Route::get('/', function () {
+       return view('admin.index');
+    })->name('dash.index')->middleware('admin');
+});
