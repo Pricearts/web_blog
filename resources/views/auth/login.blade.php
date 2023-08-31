@@ -18,7 +18,9 @@
                 <button type="submit" class="py-2 bg-blue-400 text-white w-full rounded-xl duration-300 hover:bg-opacity-[80%]">Log In</button>
             </div>
             @if($errors->any())
-                <p class="text-rose-500 opacity-[90%] text-center mb-4">Invalid crenedtials</p>
+                @foreach($errors->all() as $error)
+                    <p class="text-rose-500 opacity-[90%] text-center mb-4">{{ $error }}</p>
+                @endforeach
             @endif
             <div class="flex justify-center items-center space-x-4 mb-4">
                 <input type="checkbox" id="remember" name="remember">

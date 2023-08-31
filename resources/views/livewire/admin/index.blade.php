@@ -14,29 +14,46 @@
                                 <button wire:click="toggleModal">×</button>
                             </div>
                             <div class="p-4">
-                                <form action="{{ route('dash.auth.process') }}" method="post" class="bg-white shadow-md rounded-xl py-8 px-16 pb-8 mb-4">
+                                <form wire:submit.prevent="storeArticle" method="post" class="bg-white shadow-md rounded-xl py-8 px-16 pb-8 mb-4">
                                     @csrf
                                     <h1 class="text-center text-blue-500 mb-6 text-[22px]">Создание новой записи</h1>
                                     <div class="mb-4">
                                         <label for="title" class="block text-blue-500 opacity-[80%] font-normal mb-2">
                                             Заголовок
                                         </label>
-                                        <input type="text" value="{{ old('title') }}" class="appearance-none border border-slate-300 border-opacity-[56%] rounded-xl w-full py-2 px-3 duration-300 hover:border-blue-400 focus:border-blue-400 focus:ring-0 text-gray-700 leading-tight outline-none" id="title" name="title" placeholder="Заголовок">
+                                        <input type="text" class="appearance-none border border-slate-300 border-opacity-[56%] rounded-xl w-full py-2 px-3 duration-300 hover:border-blue-400 focus:border-blue-400 focus:ring-0 text-gray-700 leading-tight outline-none" id="title" wire:model="articleData.title" placeholder="Заголовок">
+                                        @error('articleData.title')
+                                            <p class="text-rose-400 mt-2 text-center">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="mb-4">
                                         <label for="subtitle" class="block text-blue-500 opacity-[80%] font-normal mb-2">
                                             Краткое описание
                                         </label>
-                                        <input type="text" value="{{ old('subtitle') }}" class="appearance-none border border-slate-300 border-opacity-[56%] rounded-xl w-full py-2 px-3 duration-300 hover:border-blue-400 focus:border-blue-400 focus:ring-0 text-gray-700 leading-tight outline-none" id="subtitle" name="subtitle" placeholder="Краткое описание">
+                                        <input type="text" value="{{ old('subtitle') }}" class="appearance-none border border-slate-300 border-opacity-[56%] rounded-xl w-full py-2 px-3 duration-300 hover:border-blue-400 focus:border-blue-400 focus:ring-0 text-gray-700 leading-tight outline-none" id="subtitle" wire:model="articleData.subtitle" placeholder="Краткое описание">
+                                        @error('articleData.subtitle')
+                                        <p class="text-rose-400 mt-2 text-center">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="mb-4">
                                         <label for="content" class="block text-blue-500 opacity-[80%] font-normal mb-2">
                                             Контент
                                         </label>
-                                        <textarea name="content" id="content" cols="30" rows="10" class="appearance-none border border-slate-300 border-opacity-[56%] rounded-xl w-full py-2 px-3 duration-300 hover:border-blue-400 focus:border-blue-400 focus:ring-0 text-gray-700 leading-tight outline-none"></textarea>
+                                        <textarea wire:model="articleData.content" id="content" cols="30" rows="10" class="appearance-none border border-slate-300 border-opacity-[56%] rounded-xl w-full py-2 px-3 duration-300 hover:border-blue-400 focus:border-blue-400 focus:ring-0 text-gray-700 leading-tight outline-none"></textarea>
+                                        @error('articleData.content')
+                                        <p class="text-rose-400 mt-2 text-center">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="flex justify-center mb-6">
-                                        <button type="submit" class="py-2 bg-blue-400 text-white w-full rounded-xl duration-300 hover:bg-opacity-[80%]">Создать статью</button>
+                                        <button wire:loading.attr="disabled" type="submit" class="py-2 bg-blue-400 text-white w-full rounded-xl duration-300 hover:bg-opacity-[80%]">
+                                            <span wire:loading.remove>Создать статью</span>
+                                            <span wire:loading>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="animate-spin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                   <path d="M12 3a9 9 0 1 0 9 9"></path>
+                                                </svg>
+                                            </span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
