@@ -39,7 +39,7 @@ class Index extends Component
     ];
 
     public function storeArticle() {
-        $this->validate();
+        /*$this->validate();
 
         $article = Articles::create([
            'title' => $this->articleData['title'],
@@ -49,7 +49,7 @@ class Index extends Component
         ]);
 
         $this->reset();
-        $this->showModal = false;
+        $this->showModal = false;*/
     }
 
     public function toggleModal(): void
