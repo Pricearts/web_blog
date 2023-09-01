@@ -1,6 +1,6 @@
 <div>
-    <main class="container flex flex-col justify-center items-center gap-[20px] mt-16">
-        <article class="bg-white shadow-md rounded-xl py-3 px-5 w-[700px]">
+    <main class="flex flex-col justify-center items-center gap-[20px] mt-16 xs:grid xs:grid-cols-1">
+        <article class="bg-white shadow-md rounded-xl py-3 px-5 w-[700px] xs:w-[500px]">
             <section id="article" class="space-y-12">
                 <section id="top" class="justify-between">
                     <div class="flex items-center space-x-3">

@@ -1,7 +1,7 @@
 <div>
     <main class="container mt-16">
-        <div class="flex justify-between items-center">
-            <h1 class="text-[22px] font-bold opacity-[80%]">Статьи</h1>
+        <div class="flex justify-between xs:justify-center items-center">
+            <h1 class="text-[22px] font-bold opacity-[80%] xs:hidden">Статьи</h1>
             <div>
                 <button wire:click="toggleModal" class="bg-blue-400 text-white rounded-xl py-2 px-4 duration-300 hover:bg-opacity-[70%]">Новая запись</button>
                 @if($showModal)
@@ -63,19 +63,16 @@
         </div>
         <section id="articles" class="mt-8 space-y-8">
             @foreach($articles as $article)
-                <article class="border border-slate-300 py-3 px-4 rounded-xl border-opacity-[76%] w-full flex items-center justify-between">
+                <article class="border border-slate-300 py-3 px-4 rounded-xl border-opacity-[76%] w-full flex justify-between medium:flex medium:flex-col medium:space-y-4">
                     <section id="start" class="flex items-center space-x-4">
-                        <img class="w-14 h-14 rounded-full" src="{{ $article->getAuthor()->avatar }}" alt="article_creator">
+                        <img class="w-14 h-14 xs:w-8 xs:h-8 rounded-full xxs:hidden" src="{{ $article->getAuthor()->avatar }}" alt="article_creator">
                         <div>
-                            <h1 class="font-medium text-[19px]"><span>@</span>{{ $article->getAuthor()->name }}</h1>
-                            <p class="text-[#0F1419] opacity-[42%]">{{ $article->created_at->diffForHumans() }}</p>
+                            <h1 class="font-medium text-[19px] xs:text-[16px]"><span>@</span>{{ $article->getAuthor()->name }}</h1>
+                            <h1 class="font-normal text-[16px] xs:text-[14px] break-all">{{ $article->title }}</h1>
+                            <p class="text-[#0F1419] opacity-[42%] xs:text-[13px]">{{ $article->created_at->diffForHumans() }}</p>
                         </div>
                     </section>
-                    <section id="center">
-                        <h1 class="font-medium opacity-[90%] text-[18px]">{{ $article->title }}</h1>
-                        <p class="text-[16px] opacity-[70%]">{{ Str::limit($article->subtitle, 50) }}</p>
-                    </section>
-                    <section id="end" class="flex items-center space-x-4">
+                    <section id="end" class="flex xxs:flex-col medium:justify-between xxs:justify-center items-center space-x-4">
                         <button wire:click="edit({{ $article }})" class="text-blue-500">Редактировать</button>
                         <button wire:click="destroy({{ $article }})" class="text-rose-500">Удалить</button>
                     </section>
