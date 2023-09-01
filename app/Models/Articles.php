@@ -16,4 +16,12 @@ class Articles extends Model
         'content',
         'author'
     ];
+
+    public function getAuthor() {
+        return User::where(['name' => $this->author])->first();
+    }
+
+    public function getComments() {
+        return $this->hasMany(Comments::class, 'article_id')->orderByDesc('id');
+    }
 }

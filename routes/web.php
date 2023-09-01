@@ -14,13 +14,8 @@ use App\Http\Controllers\AdminAuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
-
-Route::get('/article/{slug}', function () {
-    return view('article');
-})->name('article');
+Route::get('/', [\App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
+Route::get('/article/{id}', [\App\Http\Controllers\ArticleController::class, 'index'])->name('article');
 
 Route::group(['prefix' => 'dash'], function () {
     Route::get('/auth', [AdminAuthController::class, 'index'])->name('dash.auth.index')->middleware('not_admin');

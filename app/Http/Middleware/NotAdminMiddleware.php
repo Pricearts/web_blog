@@ -15,7 +15,7 @@ class NotAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (\Auth::check() && \Gate::denies('admin')) {
+        if (\Auth::check() && \Auth::user()->is_editor && \Gate::denies('admin')) {
             return $next($request);
         }
 
